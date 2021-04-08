@@ -85,7 +85,7 @@ analytics:
 # Site Author
 author:
   name             : "Isart Gaspà"
-  avatar           : "\Users\isart\Google Drive/Masella.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "Users\isart\Google Drive/Masella.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Data Science Portfolio"
   location         : "Barcelona, Catalunya, España"
   email            :
