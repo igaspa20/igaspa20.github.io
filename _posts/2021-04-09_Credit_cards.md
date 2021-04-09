@@ -1,6 +1,6 @@
 ---
-title: "Credit cards"
-date: 2020-04-08
+title: "Credit Cards"
+date: 2021-04-09
 tags: [data wrangling, data science, messy data]
 header:
   image: "/images/perceptron/percept.jpg"
@@ -8,11 +8,12 @@ excerpt: "Data Wrangling, Data Science, Messy Data"
 mathjax: "true"
 ---
 
+
 # Credit Card customers
 
 ## Predict Churning customers
 
-Modelo para detectar los clientes que pueden dejar nustro negocio, en este caso los clientes que pueden dejar de usar nuestras tarjetas de crédito.
+Modelo para detectar lso clientes que pueden dejar nustro negocio, en este caso los clientes que pueden dejar de usar nuestras tarjetas de crédito.
 
 Los datos provienen de Kaggle: https://www.kaggle.com/sakshigoyal7/credit-card-customers/tasks?taskId=2896
 
@@ -238,14 +239,14 @@ dataset.info()
      #   Column                    Non-Null Count  Dtype  
     ---  ------                    --------------  -----  
      0   CLIENTNUM                 10127 non-null  int64  
-     1   Attrition_Flag            10127 non-null  object
+     1   Attrition_Flag            10127 non-null  object 
      2   Customer_Age              10127 non-null  int64  
-     3   Gender                    10127 non-null  object
+     3   Gender                    10127 non-null  object 
      4   Dependent_count           10127 non-null  int64  
-     5   Education_Level           10127 non-null  object
-     6   Marital_Status            10127 non-null  object
-     7   Income_Category           10127 non-null  object
-     8   Card_Category             10127 non-null  object
+     5   Education_Level           10127 non-null  object 
+     6   Marital_Status            10127 non-null  object 
+     7   Income_Category           10127 non-null  object 
+     8   Card_Category             10127 non-null  object 
      9   Months_on_book            10127 non-null  int64  
      10  Total_Relationship_Count  10127 non-null  int64  
      11  Months_Inactive_12_mon    10127 non-null  int64  
@@ -260,7 +261,7 @@ dataset.info()
      20  Avg_Utilization_Ratio     10127 non-null  float64
     dtypes: float64(5), int64(10), object(6)
     memory usage: 1.6+ MB
-
+    
 
 
 ```python
@@ -519,40 +520,40 @@ dataset.describe()
 
 continous_features = dataset.select_dtypes(['float64']).columns.to_list()
 
-for cont_feature in continous_features:
+for cont_feature in continous_features: 
     plt.figure()
     plt.title(cont_feature)
     ax = sns.histplot(dataset[cont_feature])
 ```
 
 
-
+    
 ![png](output_12_0.png)
+    
 
 
 
-
-
+    
 ![png](output_12_1.png)
+    
 
 
 
-
-
+    
 ![png](output_12_2.png)
+    
 
 
 
-
-
+    
 ![png](output_12_3.png)
+    
 
 
 
-
-
+    
 ![png](output_12_4.png)
-
+    
 
 
 Las fetures Credit limit, Avg_Open_To_Buy, Avg_Utilization_Ratio tinen un coeficinte de asimetria muy positivo, por lo tanto una clara desviación de la cola a la derecha, hay más clientes con un límite inferior de crédito, más cliente dispuestos a abrir una liniea de crédito y más clientes que usan la targeta de manera muy frequente en los últimos doce meses.
@@ -562,64 +563,64 @@ Las fetures Credit limit, Avg_Open_To_Buy, Avg_Utilization_Ratio tinen un coefic
 #Varaibles discretas
 discrete_features = dataset.select_dtypes(['int64']).columns.to_list()
 
-for disc_feature in discrete_features:
+for disc_feature in discrete_features: 
     plt.figure()
     plt.title(disc_feature)
     ax = sns.histplot(dataset[disc_feature],kde = False)
 ```
 
 
-
+    
 ![png](output_14_0.png)
+    
 
 
 
-
-
+    
 ![png](output_14_1.png)
+    
 
 
 
-
-
+    
 ![png](output_14_2.png)
+    
 
 
 
-
-
+    
 ![png](output_14_3.png)
+    
 
 
 
-
-
+    
 ![png](output_14_4.png)
+    
 
 
 
-
-
+    
 ![png](output_14_5.png)
+    
 
 
 
-
-
+    
 ![png](output_14_6.png)
+    
 
 
 
-
-
+    
 ![png](output_14_7.png)
+    
 
 
 
-
-
+    
 ![png](output_14_8.png)
-
+    
 
 
 En las variables discretas también se observa que hay una gran parte de lso clientes que no usan la targeta y posteriormente se distribuye de forma normal con una media 1.160$. Esa media está en parte desviada por los clientes que no usan la targeta.
@@ -629,31 +630,32 @@ En las variables discretas también se observa que hay una gran parte de lso cli
 #Variables Categoricas
 
 def PlotMultiplePie(df,categorical_features = None,dropna = False):
-    # set a threshold of 30 unique variables, more than 50 can lead to ugly pie charts
+    # set a threshold of 30 unique variables, more than 50 can lead to ugly pie charts 
     threshold = 30
-
-    # if user did not set categorical_features
-    if categorical_features == None:
+    
+    # if user did not set categorical_features 
+    if categorical_features == None: 
         categorical_features = df.select_dtypes(['object','category']).columns.to_list()
         print(categorical_features)
-
-    # loop through the list of categorical_features
-    for cat_feature in categorical_features:
+    
+    # loop through the list of categorical_features 
+    for cat_feature in categorical_features: 
         num_unique = df[cat_feature].nunique(dropna = dropna)
         num_missing = df[cat_feature].isna().sum()
-        # prints pie chart and info if unique values below threshold
+        # prints pie chart and info if unique values below threshold 
         if num_unique <= threshold:
             print('Pie Chart for: ', cat_feature)
             print('Number of Unique Values: ', num_unique)
             print('Number of Missing Values: ', num_missing)
-            fig = px.pie(df[cat_feature].value_counts(dropna = dropna), values=cat_feature,
+            fig = px.pie(df[cat_feature].value_counts(dropna = dropna), values=cat_feature, 
                  names = df[cat_feature].value_counts(dropna = dropna).index,title = cat_feature,template='ggplot2')
             fig.show()
-        else:
+        else: 
             print('Pie Chart for ',cat_feature,' is unavailable due high number of Unique Values ')
             print('Number of Unique Values: ', num_unique)
             print('Number of Missing Values: ', num_missing)
             print('\n')
+    return cat_feature
 ```
 
 
@@ -665,199 +667,52 @@ PlotMultiplePie(dataset)
     Pie Chart for:  Attrition_Flag
     Number of Unique Values:  2
     Number of Missing Values:  0
+    
 
 
-
-<div>                            <div id="db10b6f0-ae97-463a-9f77-6c3680cebcb2" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("db10b6f0-ae97-463a-9f77-6c3680cebcb2")) {                    Plotly.newPlot(                        "db10b6f0-ae97-463a-9f77-6c3680cebcb2",                        [{"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "hovertemplate": "label=%{label}<br>Attrition_Flag=%{value}<extra></extra>", "labels": ["Existing Customer", "Attrited Customer"], "legendgroup": "", "name": "", "showlegend": true, "type": "pie", "values": [8500, 1627]}],                        {"legend": {"tracegroupgap": 0}, "template": {"data": {"bar": [{"error_x": {"color": "rgb(51,51,51)"}, "error_y": {"color": "rgb(51,51,51)"}, "marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "baxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "rgb(237,237,237)"}, "line": {"color": "white"}}, "header": {"fill": {"color": "rgb(217,217,217)"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowhead": 0, "arrowwidth": 1}, "autotypenumbers": "strict", "coloraxis": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "colorscale": {"sequential": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "sequentialminus": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]]}, "colorway": ["#F8766D", "#A3A500", "#00BF7D", "#00B0F6", "#E76BF3"], "font": {"color": "rgb(51,51,51)"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "rgb(237,237,237)", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "paper_bgcolor": "white", "plot_bgcolor": "rgb(237,237,237)", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "radialaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "scene": {"xaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}}, "shapedefaults": {"fillcolor": "black", "line": {"width": 0}, "opacity": 0.3}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "baxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "caxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}}}, "title": {"text": "Attrition_Flag"}},                        {"responsive": true}                    ).then(function(){
-
-var gd = document.getElementById('db10b6f0-ae97-463a-9f77-6c3680cebcb2');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })                };                });            </script>        </div>
+![png](newplot.png)
 
 
     Pie Chart for:  Gender
     Number of Unique Values:  2
     Number of Missing Values:  0
+    
 
-
-
-<div>                            <div id="9bbb50e8-a6f4-4a3d-b90f-79695a66475c" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("9bbb50e8-a6f4-4a3d-b90f-79695a66475c")) {                    Plotly.newPlot(                        "9bbb50e8-a6f4-4a3d-b90f-79695a66475c",                        [{"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "hovertemplate": "label=%{label}<br>Gender=%{value}<extra></extra>", "labels": ["F", "M"], "legendgroup": "", "name": "", "showlegend": true, "type": "pie", "values": [5358, 4769]}],                        {"legend": {"tracegroupgap": 0}, "template": {"data": {"bar": [{"error_x": {"color": "rgb(51,51,51)"}, "error_y": {"color": "rgb(51,51,51)"}, "marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "baxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "rgb(237,237,237)"}, "line": {"color": "white"}}, "header": {"fill": {"color": "rgb(217,217,217)"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowhead": 0, "arrowwidth": 1}, "autotypenumbers": "strict", "coloraxis": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "colorscale": {"sequential": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "sequentialminus": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]]}, "colorway": ["#F8766D", "#A3A500", "#00BF7D", "#00B0F6", "#E76BF3"], "font": {"color": "rgb(51,51,51)"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "rgb(237,237,237)", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "paper_bgcolor": "white", "plot_bgcolor": "rgb(237,237,237)", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "radialaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "scene": {"xaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}}, "shapedefaults": {"fillcolor": "black", "line": {"width": 0}, "opacity": 0.3}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "baxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "caxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}}}, "title": {"text": "Gender"}},                        {"responsive": true}                    ).then(function(){
-
-var gd = document.getElementById('9bbb50e8-a6f4-4a3d-b90f-79695a66475c');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })                };                });            </script>        </div>
+![png](newplot(1).png)                
 
 
     Pie Chart for:  Education_Level
     Number of Unique Values:  7
     Number of Missing Values:  0
+    
 
-
-
-<div>                            <div id="e8ca6d09-01bc-4889-b6d1-c9faecf0e848" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("e8ca6d09-01bc-4889-b6d1-c9faecf0e848")) {                    Plotly.newPlot(                        "e8ca6d09-01bc-4889-b6d1-c9faecf0e848",                        [{"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "hovertemplate": "label=%{label}<br>Education_Level=%{value}<extra></extra>", "labels": ["Graduate", "High School", "Unknown", "Uneducated", "College", "Post-Graduate", "Doctorate"], "legendgroup": "", "name": "", "showlegend": true, "type": "pie", "values": [3128, 2013, 1519, 1487, 1013, 516, 451]}],                        {"legend": {"tracegroupgap": 0}, "template": {"data": {"bar": [{"error_x": {"color": "rgb(51,51,51)"}, "error_y": {"color": "rgb(51,51,51)"}, "marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "baxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "rgb(237,237,237)"}, "line": {"color": "white"}}, "header": {"fill": {"color": "rgb(217,217,217)"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowhead": 0, "arrowwidth": 1}, "autotypenumbers": "strict", "coloraxis": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "colorscale": {"sequential": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "sequentialminus": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]]}, "colorway": ["#F8766D", "#A3A500", "#00BF7D", "#00B0F6", "#E76BF3"], "font": {"color": "rgb(51,51,51)"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "rgb(237,237,237)", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "paper_bgcolor": "white", "plot_bgcolor": "rgb(237,237,237)", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "radialaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "scene": {"xaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}}, "shapedefaults": {"fillcolor": "black", "line": {"width": 0}, "opacity": 0.3}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "baxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "caxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}}}, "title": {"text": "Education_Level"}},                        {"responsive": true}                    ).then(function(){
-
-var gd = document.getElementById('e8ca6d09-01bc-4889-b6d1-c9faecf0e848');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })                };                });            </script>        </div>
-
+![png](newplot(2).png)  
 
     Pie Chart for:  Marital_Status
     Number of Unique Values:  4
     Number of Missing Values:  0
+    
 
-
-
-<div>                            <div id="946934b4-2de2-47ee-aeee-ad11333d2a1d" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("946934b4-2de2-47ee-aeee-ad11333d2a1d")) {                    Plotly.newPlot(                        "946934b4-2de2-47ee-aeee-ad11333d2a1d",                        [{"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "hovertemplate": "label=%{label}<br>Marital_Status=%{value}<extra></extra>", "labels": ["Married", "Single", "Unknown", "Divorced"], "legendgroup": "", "name": "", "showlegend": true, "type": "pie", "values": [4687, 3943, 749, 748]}],                        {"legend": {"tracegroupgap": 0}, "template": {"data": {"bar": [{"error_x": {"color": "rgb(51,51,51)"}, "error_y": {"color": "rgb(51,51,51)"}, "marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "baxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "rgb(237,237,237)"}, "line": {"color": "white"}}, "header": {"fill": {"color": "rgb(217,217,217)"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowhead": 0, "arrowwidth": 1}, "autotypenumbers": "strict", "coloraxis": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "colorscale": {"sequential": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "sequentialminus": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]]}, "colorway": ["#F8766D", "#A3A500", "#00BF7D", "#00B0F6", "#E76BF3"], "font": {"color": "rgb(51,51,51)"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "rgb(237,237,237)", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "paper_bgcolor": "white", "plot_bgcolor": "rgb(237,237,237)", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "radialaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "scene": {"xaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}}, "shapedefaults": {"fillcolor": "black", "line": {"width": 0}, "opacity": 0.3}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "baxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "caxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}}}, "title": {"text": "Marital_Status"}},                        {"responsive": true}                    ).then(function(){
-
-var gd = document.getElementById('946934b4-2de2-47ee-aeee-ad11333d2a1d');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })                };                });            </script>        </div>
+![png](newplot(3).png)                    
 
 
     Pie Chart for:  Income_Category
     Number of Unique Values:  6
     Number of Missing Values:  0
+    
 
-
-
-<div>                            <div id="959865c9-7552-4ce9-936a-a94acfaa36a6" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("959865c9-7552-4ce9-936a-a94acfaa36a6")) {                    Plotly.newPlot(                        "959865c9-7552-4ce9-936a-a94acfaa36a6",                        [{"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "hovertemplate": "label=%{label}<br>Income_Category=%{value}<extra></extra>", "labels": ["Less than $40K", "$40K - $60K", "$80K - $120K", "$60K - $80K", "Unknown", "$120K +"], "legendgroup": "", "name": "", "showlegend": true, "type": "pie", "values": [3561, 1790, 1535, 1402, 1112, 727]}],                        {"legend": {"tracegroupgap": 0}, "template": {"data": {"bar": [{"error_x": {"color": "rgb(51,51,51)"}, "error_y": {"color": "rgb(51,51,51)"}, "marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "baxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "rgb(237,237,237)"}, "line": {"color": "white"}}, "header": {"fill": {"color": "rgb(217,217,217)"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowhead": 0, "arrowwidth": 1}, "autotypenumbers": "strict", "coloraxis": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "colorscale": {"sequential": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "sequentialminus": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]]}, "colorway": ["#F8766D", "#A3A500", "#00BF7D", "#00B0F6", "#E76BF3"], "font": {"color": "rgb(51,51,51)"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "rgb(237,237,237)", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "paper_bgcolor": "white", "plot_bgcolor": "rgb(237,237,237)", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "radialaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "scene": {"xaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}}, "shapedefaults": {"fillcolor": "black", "line": {"width": 0}, "opacity": 0.3}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "baxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "caxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}}}, "title": {"text": "Income_Category"}},                        {"responsive": true}                    ).then(function(){
-
-var gd = document.getElementById('959865c9-7552-4ce9-936a-a94acfaa36a6');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })                };                });            </script>        </div>
-
+![png](newplot(4).png)  
 
     Pie Chart for:  Card_Category
     Number of Unique Values:  4
     Number of Missing Values:  0
+    
+
+![png](newplot(5).png)  
 
 
 
-<div>                            <div id="9e68eedc-5690-4190-8799-9f80945eb828" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("9e68eedc-5690-4190-8799-9f80945eb828")) {                    Plotly.newPlot(                        "9e68eedc-5690-4190-8799-9f80945eb828",                        [{"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "hovertemplate": "label=%{label}<br>Card_Category=%{value}<extra></extra>", "labels": ["Blue", "Silver", "Gold", "Platinum"], "legendgroup": "", "name": "", "showlegend": true, "type": "pie", "values": [9436, 555, 116, 20]}],                        {"legend": {"tracegroupgap": 0}, "template": {"data": {"bar": [{"error_x": {"color": "rgb(51,51,51)"}, "error_y": {"color": "rgb(51,51,51)"}, "marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "rgb(237,237,237)", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "baxis": {"endlinecolor": "rgb(51,51,51)", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "rgb(51,51,51)"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}, "colorscale": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "rgb(237,237,237)"}, "line": {"color": "white"}}, "header": {"fill": {"color": "rgb(217,217,217)"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowhead": 0, "arrowwidth": 1}, "autotypenumbers": "strict", "coloraxis": {"colorbar": {"outlinewidth": 0, "tickcolor": "rgb(237,237,237)", "ticklen": 6, "ticks": "inside"}}, "colorscale": {"sequential": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]], "sequentialminus": [[0, "rgb(20,44,66)"], [1, "rgb(90,179,244)"]]}, "colorway": ["#F8766D", "#A3A500", "#00BF7D", "#00B0F6", "#E76BF3"], "font": {"color": "rgb(51,51,51)"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "rgb(237,237,237)", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "paper_bgcolor": "white", "plot_bgcolor": "rgb(237,237,237)", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "radialaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "scene": {"xaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "rgb(237,237,237)", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "zerolinecolor": "white"}}, "shapedefaults": {"fillcolor": "black", "line": {"width": 0}, "opacity": 0.3}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "baxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}, "bgcolor": "rgb(237,237,237)", "caxis": {"gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside"}}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "showgrid": true, "tickcolor": "rgb(51,51,51)", "ticks": "outside", "title": {"standoff": 15}, "zerolinecolor": "white"}}}, "title": {"text": "Card_Category"}},                        {"responsive": true}                    ).then(function(){
 
-var gd = document.getElementById('9e68eedc-5690-4190-8799-9f80945eb828');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })                };                });            </script>        </div>
 
 
 
@@ -1157,9 +1012,9 @@ plt.show()
 ```
 
 
-
+    
 ![png](output_19_0.png)
-
+    
 
 
 Se observa que hay una relación positiva entre las variables edad del cliente y meses que es cliente, lo que dice bien del banco o que el proceso de canviar de bancoo es lento y los clientes no suelen canviar.
@@ -1195,7 +1050,7 @@ for col in dataset_copy.select_dtypes('category').columns.to_list():
 ```
 
     Attrition_Flag: ['Attrited Customer', 'Existing Customer']
-
+    
 
 
 ```python
@@ -1210,7 +1065,7 @@ for col in dataset_copy.select_dtypes('category').columns.to_list():
 ```
 
     Attrition_Flag: [1, 0]
-
+    
 
 Separamos en Target (X) y Features (y)
 
@@ -1233,12 +1088,12 @@ X.info()
      #   Column                    Non-Null Count  Dtype  
     ---  ------                    --------------  -----  
      0   Customer_Age              10127 non-null  int64  
-     1   Gender                    10127 non-null  object
+     1   Gender                    10127 non-null  object 
      2   Dependent_count           10127 non-null  int64  
-     3   Education_Level           10127 non-null  object
-     4   Marital_Status            10127 non-null  object
-     5   Income_Category           10127 non-null  object
-     6   Card_Category             10127 non-null  object
+     3   Education_Level           10127 non-null  object 
+     4   Marital_Status            10127 non-null  object 
+     5   Income_Category           10127 non-null  object 
+     6   Card_Category             10127 non-null  object 
      7   Months_on_book            10127 non-null  int64  
      8   Total_Relationship_Count  10127 non-null  int64  
      9   Months_Inactive_12_mon    10127 non-null  int64  
@@ -1253,7 +1108,7 @@ X.info()
      18  Avg_Utilization_Ratio     10127 non-null  float64
     dtypes: float64(5), int64(9), object(5)
     memory usage: 1.5+ MB
-
+    
 
 
 ```python
@@ -1445,17 +1300,17 @@ X.info()
      8   Total_Relationship_Count  10127 non-null  int64   
      9   Months_Inactive_12_mon    10127 non-null  int64   
      10  Contacts_Count_12_mon     10127 non-null  int64   
-     11  Credit_Limit              10127 non-null  float64
+     11  Credit_Limit              10127 non-null  float64 
      12  Total_Revolving_Bal       10127 non-null  int64   
-     13  Avg_Open_To_Buy           10127 non-null  float64
-     14  Total_Amt_Chng_Q4_Q1      10127 non-null  float64
+     13  Avg_Open_To_Buy           10127 non-null  float64 
+     14  Total_Amt_Chng_Q4_Q1      10127 non-null  float64 
      15  Total_Trans_Amt           10127 non-null  int64   
      16  Total_Trans_Ct            10127 non-null  int64   
-     17  Total_Ct_Chng_Q4_Q1       10127 non-null  float64
-     18  Avg_Utilization_Ratio     10127 non-null  float64
+     17  Total_Ct_Chng_Q4_Q1       10127 non-null  float64 
+     18  Avg_Utilization_Ratio     10127 non-null  float64 
     dtypes: category(5), float64(5), int64(9)
     memory usage: 1.1 MB
-
+    
 
 
 ```python
@@ -1468,7 +1323,7 @@ for col in X.select_dtypes('category').columns.to_list():
     Marital_Status: ['Divorced', 'Married', 'Single', 'Unknown']
     Income_Category: ['$120K +', '$40K - $60K', '$60K - $80K', '$80K - $120K', 'Less than $40K', 'Unknown']
     Card_Category: ['Blue', 'Gold', 'Platinum', 'Silver']
-
+    
 
 
 ```python
@@ -1477,7 +1332,7 @@ def encode_and_bind(original_dataframe, feature_to_encode):
     dummies = pd.get_dummies(original_dataframe[[feature_to_encode]])
     res = pd.concat([original_dataframe, dummies], axis=1)
     res = res.drop([feature_to_encode], axis=1)
-    return(res)
+    return(res) 
 
 features_to_encode = X.select_dtypes('category').columns.to_list()
 for feature in features_to_encode:
@@ -1533,7 +1388,7 @@ X.info()
      36  Card_Category_Silver            10127 non-null  uint8  
     dtypes: float64(5), int64(9), uint8(23)
     memory usage: 1.3 MB
-
+    
 
 
 ```python
@@ -1716,7 +1571,7 @@ X.head()
 
 
 ```python
-#La varaible target será el Atrrition flag y tal como hemos visto, solo hay un 16% de Atrriet customer, por lo que debemos
+#La varaible target será el Atrrition flag y tal como hemos visto, solo hay un 16% de Atrriet customer, por lo que debemos 
 #estratificar la partición en train y test para que obtener datos con la misma representación en train y test
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test  = train_test_split(X, y, test_size=0.2, random_state=0, stratify=y)
@@ -1771,7 +1626,7 @@ X_train.info()
      36  Card_Category_Silver            8101 non-null   uint8  
     dtypes: float64(5), int64(9), uint8(23)
     memory usage: 1.1 MB
-
+    
 
 #### Outliers
 
@@ -1827,13 +1682,13 @@ for feat in header:
     feature: Card_Category_Gold. Max z-score: 9.036772947580484. Min z-score: -0.11065897149355085
     feature: Card_Category_Platinum. Max z-score: 21.806636874234087. Min z-score: -0.045857598572733735
     feature: Card_Category_Silver. Max z-score: 4.197974333621768. Min z-score: -0.23821012720133955
-
+    
 
 
 ```python
 #Hay dos features con valores algo desviados, son el Total_Amt_Chng_Q4_Q1 y Total_Ct_Chng_Q4_Q1
 
-# Vamos a investigar la distribución de la feature population que se va
+# Vamos a investigar la distribución de la feature population que se va 
 # más allá de 12...
 z1 = stats.zscore(X_train['Total_Amt_Chng_Q4_Q1'])
 z2 = stats.zscore(X_train['Total_Ct_Chng_Q4_Q1'])
@@ -1848,7 +1703,7 @@ print(np.where(z2 > 10))
 
     (array([6074, 7185], dtype=int64),)
     (array([2363, 2937, 6074], dtype=int64),)
-
+    
 
 
 ```python
@@ -2151,7 +2006,7 @@ from sklearn.neighbors import KNeighborsClassifier
 knn_sc = Pipeline(steps=[("scaler",StandardScaler()),
                          ("knn",KNeighborsClassifier())
                          ]
-                  )
+                  ) 
 
 
 #Support Vector Machine
@@ -2193,7 +2048,7 @@ grid_random_forest = {"n_estimators":[50],
                       "random_state":[0]
                      }
 
-#Extra Tree
+#Extra Tree 
 grid_extra_tree = {"n_estimators":[50],
                    "max_depth": [3, 5, 10],
                    "random_state":[0]
@@ -2203,14 +2058,11 @@ grid_extra_tree = {"n_estimators":[50],
 grid_gradient_boosting = {"loss": ["deviance"],
                           "learning_rate": [0.05, 0.1, 0.2, 0.5],
                           "n_estimators": [20, 50, 100, 500],
-                          "max_depth": [int(x) for x in np.arange(start = 20, stop = 101, step = 20)],
                           "subsample": [1.0, 0.5],
                           "max_features": ["sqrt", "auto"],
                           "min_samples_split" : [2, 5, 10],
-                          "min_samples_leaf" : [1, 2, 4],
                           "random_state":[0]
                           }
-
 
 
 #Regresión Logística
@@ -2223,16 +2075,16 @@ grid_logr = {"logr__penalty":["none"],
 grid_knn = {"knn__n_neighbors": [2,3,5,10],
            "knn__weights": ["uniform","distance"]
            }
-
+            
 
 #Support Vector Machine
-grid_svc = {"svc__C": [0.01, 0.1, 0.5, 1.0, 5.0, 10.0],
+grid_svc = {"svc__C": [0.01, 0.1, 0.5, 1.0, 5.0, 10.0], 
             "svc__gamma": [0.001, 0.1, 1.0, "auto",10.0, 30.0],  
             "svc__probability":[1],
             "svc__random_state":[0]
            }   
 
-
+                          
 #Red Neuronal
 grid_red = {"red__hidden_layer_sizes":[(3,3),
                                        (3,),
@@ -2288,7 +2140,7 @@ gs_extra_tree = GridSearchCV(et,
 
 gs_gradient_boosting = GridSearchCV(GB,
                        grid_gradient_boosting,
-                       cv=3,
+                       cv=5,
                        scoring="accuracy",
                        verbose=1,
                        n_jobs=-1)
@@ -2312,7 +2164,7 @@ gs_knn = GridSearchCV(knn_sc,
 
 gs_svc = GridSearchCV(svc_sc,
                        grid_svc,
-                       cv=10,
+                       cv=5,
                        scoring="accuracy",
                        verbose=1,
                        n_jobs=-1)
@@ -2330,15 +2182,15 @@ gs_red_neuronal = GridSearchCV(red_sc,
 #Metemos todos los Grid Search en un diccionario
 
 todos_los_grid_searchs = {
-                          #"gs_arbol": gs_arbol,
-                          #"gs_naive_bayes": gs_naive_bayes,
-                          #"gs_random_forest": gs_random_forest,
-                          #"gs_extra_tree": gs_extra_tree,
+                          "gs_arbol": gs_arbol,
+                          "gs_naive_bayes": gs_naive_bayes,
+                          "gs_random_forest": gs_random_forest,
+                          "gs_extra_tree": gs_extra_tree,
                           "gs_gradient_boosting": gs_gradient_boosting,
-                          #"gs_logistic_r": gs_logistic_r,
-                          #"gs_knn": gs_knn,
-                          #"gs_svc": gs_svc,
-                          #"gs_red_neuronal": gs_red_neuronal
+                          "gs_logistic_r": gs_logistic_r,
+                          "gs_knn": gs_knn,
+                          "gs_svc": gs_svc,
+                          "gs_red_neuronal": gs_red_neuronal
 }
 
 
@@ -2351,13 +2203,7 @@ for nombre, grid_search in todos_los_grid_searchs.items():
     grid_search.fit(X_train, y_train)
 ```
 
-    Haciendo Grid Search de gs_gradient_boosting...
-    Fitting 3 folds for each of 2880 candidates, totalling 8640 fits
-
-
-    [Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
-    [Parallel(n_jobs=-1)]: Done  34 tasks      | elapsed:  2.4min
-
+   
 
 
 ```python
@@ -2375,10 +2221,10 @@ mejor_score_de_cada_gridsearch
      ('gs_naive_bayes', 0.8980377829535249),
      ('gs_random_forest', 0.9470437350626417),
      ('gs_extra_tree', 0.8919897702881674),
-     ('gs_gradient_boosting', 0.9730899209937434),
+     ('gs_gradient_boosting', 0.9727194766224173),
      ('gs_logistic_r', 0.9027283798389429),
      ('gs_knn', 0.8690287862873147),
-     ('gs_svc', 0.918035956219269),
+     ('gs_svc', 0.9164301109664054),
      ('gs_red_neuronal', 0.9239600554109391)]
 
 
@@ -2424,7 +2270,7 @@ mejor_score_de_cada_gridsearch_df_ordenado
     <tr>
       <th>4</th>
       <td>gs_gradient_boosting</td>
-      <td>0.973090</td>
+      <td>0.972719</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2444,7 +2290,7 @@ mejor_score_de_cada_gridsearch_df_ordenado
     <tr>
       <th>7</th>
       <td>gs_svc</td>
-      <td>0.918036</td>
+      <td>0.916430</td>
     </tr>
     <tr>
       <th>5</th>
@@ -2491,6 +2337,15 @@ mejor_pipeline
 
 
 
+2n) 97.0
+GradientBoostingClassifier(learning_rate=0.05, max_depth=80,
+                           max_features='auto', min_samples_leaf=4,
+                           n_estimators=500, random_state=0, subsample=0.5)
+                           
+1r) 97.3                           
+GradientBoostingClassifier(learning_rate=0.2, max_features='sqrt',
+                           n_estimators=500, random_state=0)                           
+
 
 ```python
 #Guardamos el modelo
@@ -2515,7 +2370,7 @@ print("El modelo tiene un accuracy en el conjunto de test de %s" % accuracy_en_t
 ```
 
     El modelo tiene un accuracy en el conjunto de test de 0.9703849950641659
-
+    
 
 
 ```python
@@ -2536,17 +2391,17 @@ def metricas(modelo,X=X_test,y=y_test):
     matriz=pd.DataFrame(matriz)
     matriz.columns=["Predicho 0", "Predicho 1"]
     matriz.index=["Test 0", "Test 1"]
-
+    
     diccionario={"f1 score":f1,
                  "recall":recall,
                 "precision":precision,
                 "Área roc":area,
                 "Accuracy":accuracy,
                 "Matriz de confusión":matriz}
-
+    
     sn.heatmap(matriz, annot=True)
     plt.show
-
+    
     return diccionario
 ```
 
@@ -2570,9 +2425,9 @@ metricas(mejor_pipeline, X=X_test, y=y_test)
 
 
 
-
-![png](output_66_1.png)
-
+    
+![png](output_67_1.png)
+    
 
 
 El modelo es capaz de predecir con una precisión (acuracy) en test del 94,9%.
@@ -2605,13 +2460,13 @@ plt.show()
 ```
 
 
-
-![png](output_68_0.png)
-
-
-
+    
+![png](output_69_0.png)
+    
 
 
+
+El gráfico del área ROC nos muestra que el modelo es capaz de clasificar los clientes con un ajuste del 99,4%
 
 ```python
 
