@@ -1,10 +1,10 @@
 ---
 title: "Credit Cards"
-date: 2021-04-09
-tags: [data wrangling, data science, messy data]
+date: 2021- 04- 09
+tags: [data, Data science, finance]
 header:
   image: "/images/perceptron/percept.jpg"
-excerpt: "Data Wrangling, Data Science, Messy Data"
+excerpt: "data, Data Science, finance"
 mathjax: "true"
 ---
 
