@@ -678,7 +678,7 @@ PlotMultiplePie(dataset)
     Number of Missing Values:  0
     
 
-![png](newplot(1).png)                
+![png](newplot1.png)                
 
 
     Pie Chart for:  Education_Level
@@ -686,14 +686,14 @@ PlotMultiplePie(dataset)
     Number of Missing Values:  0
     
 
-![png](newplot(2).png)  
+![png](newplot2.png)  
 
     Pie Chart for:  Marital_Status
     Number of Unique Values:  4
     Number of Missing Values:  0
     
 
-![png](newplot(3).png)                    
+![png](newplot3.png)                    
 
 
     Pie Chart for:  Income_Category
@@ -701,14 +701,14 @@ PlotMultiplePie(dataset)
     Number of Missing Values:  0
     
 
-![png](newplot(4).png)  
+![png](newplot4.png)  
 
     Pie Chart for:  Card_Category
     Number of Unique Values:  4
     Number of Missing Values:  0
     
 
-![png](newplot(5).png)  
+![png](newplot5.png)  
 
 
 
