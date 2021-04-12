@@ -529,7 +529,7 @@ for cont_feature in continous_features:
 
     
 
-<img src="output_12_0.png">
+<img src="images/output_12_0.png">
 
 
     
