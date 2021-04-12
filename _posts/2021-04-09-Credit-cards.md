@@ -527,7 +527,7 @@ for cont_feature in continous_features:
 ```
 
 
-    
+{%include figure image_path="/_posts/output_12_0.png"}   
 
 ![png](output_12_0.png)
 
