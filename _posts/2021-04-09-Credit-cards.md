@@ -528,8 +528,8 @@ for cont_feature in continous_features:
 
 
     
-   ![](_posts/output_12_0.png)
 
+<img src="output_12_0.png"
 
 
     
