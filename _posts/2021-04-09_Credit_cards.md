@@ -1,6 +1,6 @@
 ---
 title: "Credit Cards"
-date: 2021- 04- 09
+date: 2021-04-09
 tags: [data, Data science, finance]
 header:
   image: "/images/perceptron/percept.jpg"
