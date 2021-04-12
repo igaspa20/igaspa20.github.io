@@ -4,8 +4,8 @@ date: 2021-04-09
 tags: [data, Data science, finance]
 header:
   image: "/images/perceptron/percept.jpg"
-excerpt: "data, Data Science, finance"
-mathjax: "true"
+  excerpt: "data, Data Science, finance"
+  mathjax: "true"
 ---
 
 
