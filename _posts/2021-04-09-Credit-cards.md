@@ -527,29 +527,27 @@ for cont_feature in continous_features:
 ```
 
 {% include figure image_path="/images/output_12_0.png" %}
-  
-
-![png](output_12_0.png)
-
-    
-![png](output_12_1.png)
-    
 
 
+{% include figure image_path="/images/output_12_1.png" %}    
 
     
-![png](output_12_2.png)
+
+
+
+ {% include figure image_path="/images/output_12_2.png" %}   
+
     
 
 
-
+{% include figure image_path="/images/output_12_3.png" %}
     
-![png](output_12_3.png)
+
     
 
 
 
-    
+{% include figure image_path="/images/output_12_4.png" %}    
 ![png](output_12_4.png)
     
 
@@ -568,56 +566,56 @@ for disc_feature in discrete_features:
 ```
 
 
-    
-![png](output_14_0.png)
-    
-
-
+{% include figure image_path="/images/output_14_0.png" %}    
 
     
-![png](output_14_1.png)
-    
 
 
 
-    
-![png](output_14_2.png)
+{% include figure image_path="/images/output_14_1.png" %}    
+
     
 
 
 
-    
-![png](output_14_3.png)
-    
-
-
+{% include figure image_path="/images/output_14_2.png" %}   
 
     
-![png](output_14_4.png)
-    
 
 
 
-    
-![png](output_14_5.png)
+{% include figure image_path="/images/output_14_3.png" %}    
+
     
 
 
 
-    
-![png](output_14_6.png)
-    
-
-
+{% include figure image_path="/images/output_14_4.png" %}    
 
     
-![png](output_14_7.png)
+
+
+
+{% include figure image_path="/images/output_14_5.png" %}    
+
     
 
 
 
+{% include figure image_path="/images/output_14_6.png" %}    
+
     
-![png](output_14_8.png)
+
+
+
+{% include figure image_path="/images/output_14_7.png" %}    
+
+    
+
+
+
+{% include figure image_path="/images/output_14_8.png" %}    
+
     
 
 
@@ -667,46 +665,46 @@ PlotMultiplePie(dataset)
     Number of Missing Values:  0
     
 
+{% include figure image_path="/images/newplot.png" %}
 
-![png](newplot.png)
 
 
     Pie Chart for:  Gender
     Number of Unique Values:  2
     Number of Missing Values:  0
     
-
-![png](newplot1.png)                
+{% include figure image_path="/images/newplot1.png" %}
+               
 
 
     Pie Chart for:  Education_Level
     Number of Unique Values:  7
     Number of Missing Values:  0
     
-
-![png](newplot2.png)  
+{% include figure image_path="/images/newplot2.png" %}
+ 
 
     Pie Chart for:  Marital_Status
     Number of Unique Values:  4
     Number of Missing Values:  0
     
-
-![png](newplot3.png)                    
+{% include figure image_path="/images/newplot3.png" %}
+                 
 
 
     Pie Chart for:  Income_Category
     Number of Unique Values:  6
     Number of Missing Values:  0
     
-
-![png](newplot4.png)  
+{% include figure image_path="/images/newplot4.png" %}
+ 
 
     Pie Chart for:  Card_Category
     Number of Unique Values:  4
     Number of Missing Values:  0
     
+{% include figure image_path="/images/newplot5.png" %}
 
-![png](newplot5.png)  
 
 
 
@@ -1010,8 +1008,8 @@ plt.show()
 ```
 
 
-    
-![png](output_19_0.png)
+{% include figure image_path="/images/output_19_0.png" %}    
+
     
 
 
@@ -2423,8 +2421,8 @@ metricas(mejor_pipeline, X=X_test, y=y_test)
 
 
 
-    
-![png](output_67_1.png)
+{% include figure image_path="/images/output_67_1.png" %}       
+
     
 
 
@@ -2458,8 +2456,8 @@ plt.show()
 ```
 
 
-    
-![png](output_69_0.png)
+{% include figure image_path="/images/output_69_0.png" %}    
+
     
 
 
