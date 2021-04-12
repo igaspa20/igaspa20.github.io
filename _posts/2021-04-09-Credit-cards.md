@@ -529,7 +529,7 @@ for cont_feature in continous_features:
 
     
 
-![test](images/output_12_0.png)
+![test](output_12_0.png)
 
     
 ![png](output_12_1.png)
