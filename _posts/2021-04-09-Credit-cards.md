@@ -526,7 +526,7 @@ for cont_feature in continous_features:
     ax = sns.histplot(dataset[cont_feature])
 ```
 
-{% include figure image_path="/_posts/output_12_0.png" %}
+{% include figure image_path="/images/output_12_0.png" %}
   
 
 ![png](output_12_0.png)
