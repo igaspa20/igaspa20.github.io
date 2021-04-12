@@ -3,14 +3,14 @@ title: "Credit Cards"
 date: 2021-04-09
 tags: [data, Data science, finance]
 header:
-  image: "/images/perceptron/visa_image.png"
+  image: 
   excerpt: "data, Data Science, finance"
   mathjax: "true"
 ---
 
 
 # Credit Card customers
-
+{% include figure image_path="/images/perceptron/visa_image.png" %}
 ## Predict Churning customers
 
 Modelo para detectar los clientes que pueden dejar nuestro negocio, en este caso los clientes que pueden dejar de usar nuestras tarjetas de crédito.
