@@ -3,7 +3,7 @@ title: "Credit Cards"
 date: 2021-04-09
 tags: [data, Data science, finance]
 header:
-  image: "/_posts/visa_image.jpg"
+  image: "/images/perceptron/percept.jpg"
   excerpt: "data, Data Science, finance"
   mathjax: "true"
 ---
