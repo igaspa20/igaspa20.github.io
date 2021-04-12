@@ -529,8 +529,7 @@ for cont_feature in continous_features:
 
     
 
-<img src="images/output_12_0.png">
-
+![test](images/output_12_0.png)
 
     
 ![png](output_12_1.png)
