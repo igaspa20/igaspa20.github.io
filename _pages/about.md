@@ -2,7 +2,7 @@
 title: "About"
 permalink: /about/
 header:
-  image: "/images/zakim.jpg"
+  image: "/images/quercus.jpg"
 ---
 
 Ingeniero Forestal con el máster de DataScience en Datahack. Actulamente cogiendo experiencia con Python, R y visualizaciones Power BI.
