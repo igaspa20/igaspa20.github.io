@@ -529,7 +529,7 @@ for cont_feature in continous_features:
 
     
 "_posts/output_12_0.png"
-  
+ image: "/images/perceptron/percept.jpg" 
 
 
 
