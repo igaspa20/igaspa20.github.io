@@ -528,7 +528,7 @@ for cont_feature in continous_features:
 
 
     
-"/output_12_0.png"
+"_posts/output_12_0.png"
   
 
 
