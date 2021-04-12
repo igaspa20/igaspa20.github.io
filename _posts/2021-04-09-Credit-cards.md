@@ -528,7 +528,7 @@ for cont_feature in continous_features:
 
 
     
-![png](https://github.com/igaspa20/igaspa20.github.io/blob/master/_posts/output_12_0.png)
+![output_12_0](https://github.com/igaspa20/igaspa20.github.io/blob/master/_posts/output_12_0.png)
 
 
 
