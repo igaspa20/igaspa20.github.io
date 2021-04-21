@@ -9,9 +9,9 @@ header:
 ---
 
 
-# Credit Card customers
+# Predicción de fuga de clientes de targetas de crédito
 {% include figure image_path="/images/perceptron/visa_image.png" %}
-## Predict Churning customers
+## Classification Model
 
 Modelo para detectar los clientes que pueden dejar nuestro negocio, en este caso los clientes que pueden dejar de usar nuestras tarjetas de crédito.
 
