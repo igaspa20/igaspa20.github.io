@@ -1527,10 +1527,10 @@ import csv
 
 
 ```python
-consumer_key = "Jo1lDBKNxj2CqszGMJVYbNS9h"
-consumer_secret = "Occ91jX6K4SgQHhx7V3zDfMdy3FmI02VzSgR2POBD7sSYU1u31"
-access_token = "393446438-t0lqRajYB8pnFXVhi58GNCjKekmBsdQaXtR40TXb"
-access_secret = "POyeQU5o3SfAcX32urObMJsJ9L3ywASfXVphZf1sAG0AS"
+consumer_key = "####"
+consumer_secret = "####"
+access_token = "####"
+access_secret = "####"
 ```
 
 
