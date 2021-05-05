@@ -1321,18 +1321,18 @@ print(int_b_media)
     0.19001808738673687
     
 
-Con una confinza del 95% podemos decir que las medias son iguales. Tanto Iberdorla como Naturgy tienen una media estadíticamente igual en la valoración de los resultados
+Con una confinza del 95% podemos decir que las medias son iguales. Tanto Iberdorla como Naturgy tienen una media estadísticamente igual en la valoración de los tweets.
 
 # Conclusiones
 
-Se ha trabajado con NLP para detectar las palabras más representativas de los comentarios, con ello se ha aplicado un modelo para determinar la valoración de los comentarios.
-Una vez con el Vectorizador y el modelo se ha aplicada a Tweets descargados de los días 3 al 5 de mayo de 2021 con los hastagas Iberdrola y Naturgy.
+Se ha trabajado con NLP para detectar las palabras más representativas de los comentarios, con ello se ha aplicado un modelo para determinar su valoración.
+Una vez con el Vectorizador y el modelo, se ha aplicado a Tweets descargados de los días 3 al 5 de mayo de 2021 con los hastagas Iberdrola y Naturgy.
 
 El contraste de hipótesis nos ha demostrado que no había diferencias significativas entre los tweets de las dos compañías. Además las dos compañías han obtenido un 2,76 y 2,81 de valoración en los comentarios sobre 5. Si lo calculamos sobre una puntuación máxima de 10, podemos decir que han obtenido un 5,52 para Iberdrola y un 5,62 para Naturgy.
 
 Hay que destacar que lso Tweets incluyen quejas de los usuarios, autoplublicidad de las compañías, comentarios respecto al despempeño en bolsa de las acciones, etc.. y solo son tweets de 3 días. Podria ser más efectivo si hiciera el mismo análisis pero para comentarios del buzon de clientes de una compañía en concreto.
 
-Teniendo los algoritmos desarrollados, se peuden comprar sobre todos los temas imaginables, des de productos, ciudades, personas, partidos políticos, acciones.. en este cas han sido compañías pero se puede adaptar a cualquier producto.
+Teniendo los algorítmos desarrollados, se peuden comprar sobre todos los temas imaginables, des de productos, ciudades, personas, partidos políticos, acciones.. en este cas han sido compañías pero se puede adaptar a cualquier producto.
 
 # Agradecimientos
 La parte del codigo de NLP se ha adaptado de Hector Escaso (https://hescaso.github.io/), posteriormente se ha creado un modelo de regresión para poder determinar la puntuación de cada modelo.
