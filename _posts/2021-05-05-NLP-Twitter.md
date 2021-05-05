@@ -299,24 +299,6 @@ gs_reglog.fit(Comentarios_train, estrellas_train)
     Fitting 8 folds for each of 1 candidates, totalling 8 fits
     
 
-    [Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
-    [Parallel(n_jobs=-1)]: Done   2 out of   8 | elapsed:  2.5min remaining:  7.4min
-    [Parallel(n_jobs=-1)]: Done   5 out of   8 | elapsed:  2.5min remaining:  1.5min
-    [Parallel(n_jobs=-1)]: Done   8 out of   8 | elapsed:  2.5min remaining:    0.0s
-    [Parallel(n_jobs=-1)]: Done   8 out of   8 | elapsed:  2.5min finished
-    C:\Users\isart\anaconda3\lib\site-packages\sklearn\linear_model\_logistic.py:762: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      n_iter_i = _check_optimize_result(
-    
-
-
-
-
     GridSearchCV(cv=8, estimator=LogisticRegression(), n_jobs=-1, param_grid={},
                  scoring='r2', verbose=3)
 
@@ -396,12 +378,6 @@ gs_rf_reg.fit(Comentarios_train, estrellas_train)
     Fitting 5 folds for each of 1 candidates, totalling 5 fits
     
 
-    [Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
-    [Parallel(n_jobs=-1)]: Done   2 out of   5 | elapsed: 23.5min remaining: 35.2min
-    [Parallel(n_jobs=-1)]: Done   5 out of   5 | elapsed: 23.6min finished
-    
-
-
 
 
     GridSearchCV(cv=5,
@@ -475,13 +451,6 @@ gs_gradient_boosting_reg.fit(Comentarios_train, estrellas_train)
 ```
 
     Fitting 5 folds for each of 1 candidates, totalling 5 fits
-    
-
-    [Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
-    [Parallel(n_jobs=-1)]: Done   2 out of   5 | elapsed:   34.4s remaining:   51.7s
-    [Parallel(n_jobs=-1)]: Done   5 out of   5 | elapsed:   34.7s finished
-    
-
 
 
 
