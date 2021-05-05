@@ -1,4 +1,28 @@
-# NLP con uso en Twiter
+---
+title: "Procesamiento Natural del Lenguaje en Twitter"
+date: 2021-05-05
+tags: [data, Data science, finance]
+header:
+  image: 
+  excerpt: "Twitter, Data Science, NLP"
+  mathjax: "true"
+---
+
+
+
+# NLP + Twitter + Inferencia
+
+En este ejercicio vamos a crear un modelo de regresión y un contraste de medias para determinar si los obtenidos en Twitter de dos compañias eléctricas, en este caso Iberdrola y Naturagy, son mejores unos que otros.
+
+
+Para determinar si un comentario está valorado positivamente o negativamente, partimos de una tabla con 6.000 comentarios de Amazon y valorados
+en una escala del 1 al 5. Primero debemos estudiar las palabras de cada comentario y sacar las menos representativas, eso lo realizaremos con la funcion Tokenize y Bag of words.
+
+Una vez tengamos las palabras más importantes de cada comentario con la función Vectorizer, entrenaremos varios modelos para determinar hasta que punto es capaz de predecir si el comentario es positivo o negativo.
+
+Con el mejor modelo ya obtenido, nos descargaremos una lista de tweets con el hastag de cada compañia.
+
+Le aplicaremos el Vectorizador y el modelo de regresión con el fin de obtener la valoración de cada comentario. Con las valoraciones de cada compañia realizaremos un estudio estadístico para determinar si una compañia tiene de media mcomentarios más bien valorados que la otra.
 
 
 ```python
