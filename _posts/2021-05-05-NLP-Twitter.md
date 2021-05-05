@@ -1332,7 +1332,7 @@ Una vez con el Vectorizador y el modelo, se ha aplicado a Tweets descargados de 
 
 El contraste de hipótesis nos ha demostrado que no había diferencias significativas entre los tweets de las dos compañías. Además las dos compañías han obtenido un 2,76 y 2,81 de valoración en los comentarios sobre 5. Si lo calculamos sobre una puntuación máxima de 10, podemos decir que han obtenido un 5,52 para Iberdrola y un 5,62 para Naturgy.
 
-Hay que destacar que lso Tweets incluyen quejas de los usuarios, autoplublicidad de las compañías, comentarios respecto al despempeño en bolsa de las acciones, etc.. y solo son tweets de 3 días. Podria ser más efectivo si hiciera el mismo análisis pero para comentarios del buzon de clientes de una compañía en concreto.
+Hay que destacar que los Tweets incluyen quejas de los usuarios, autoplublicidad de las compañías, comentarios respecto al despempeño en bolsa de las acciones, etc.. y solo son tweets de 3 días. Podria ser más efectivo si hiciera el mismo análisis pero para comentarios del buzon de clientes de una compañía en concreto.
 
 Teniendo los algorítmos desarrollados, se peuden comprar sobre todos los temas imaginables, des de productos, ciudades, personas, partidos políticos, acciones.. en este cas han sido compañías pero se puede adaptar a cualquier producto.
 
