@@ -12,6 +12,8 @@ header:
 
 # NLP + Twitter + Iberdrola vs Naturgy
 
+{% include figure image_path="/images/Rplot_ibe.png" %}
+
 En este extenso ejercicio, vamos a crear un algoritmo para estudiar las palabras más representativas de una série de comentarios, varios modelos de regresión y un contraste de medias. El objetivo es determinar si los obtenidos en Twitter de dos compañías eléctricas, en este caso Iberdrola y Naturagy, son mejores unos que otros.
 
 Éste tipo de valoraciones se pueden aplicar a todo tipo de productos y determinar la satisfacción de los clientes.
