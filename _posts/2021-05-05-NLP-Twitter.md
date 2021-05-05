@@ -1162,7 +1162,7 @@ plt.show()
 
 
 {% include figure image_path="/images/output_59_0.png" %}      
-![png](output_59_0.png)
+
     
 
 
@@ -1178,7 +1178,7 @@ plt.show()
 
 
 {% include figure image_path="/images/output_60_0.png" %}     
-![png](output_60_0.png)
+
     
 
 
@@ -1190,7 +1190,7 @@ boxplot = result.boxplot(rot=90)
 
 
 {% include figure image_path="/images/output_61_0.png" %}      
-![png](output_61_0.png)
+
     
 Se demustra que la variación es muy elevada, y que los comentarios son o muy positivos o muy negativos, hay poco término medio.
 
