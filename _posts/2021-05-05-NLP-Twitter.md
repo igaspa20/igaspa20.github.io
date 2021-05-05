@@ -10,7 +10,7 @@ header:
 
 
 
-# NLP + Twitter + Inferencia
+# NLP + Twitter + Iberdrola vs Naturgy
 
 En este ejercicio vamos a crear un modelo de regresión y un contraste de medias para determinar si los obtenidos en Twitter de dos compañias eléctricas, en este caso Iberdrola y Naturagy, son mejores unos que otros.
 
