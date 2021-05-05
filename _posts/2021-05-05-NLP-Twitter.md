@@ -14,20 +14,20 @@ header:
 
 {% include figure image_path="/images/Rplot_ibe.png" %}
 
-En este extenso ejercicio, vamos a crear un algoritmo para estudiar las palabras más representativas de una série de comentarios, varios modelos de regresión y un contraste de medias. El objetivo es determinar si los obtenidos en Twitter de dos compañías eléctricas, en este caso Iberdrola y Naturagy, son mejores unos que otros.
+En este extenso ejercicio, vamos a crear un algoritmo para estudiar las palabras más representativas de una serie de comentarios, varios modelos de regresión y un contraste de medias. El objetivo es determinar si los obtenidos en Twitter de dos compañías eléctricas, en este caso Iberdrola y Naturgy, son mejores unos que otros.
 
-Éste tipo de valoraciones se pueden aplicar a todo tipo de productos y determinar la satisfacción de los clientes.
+Este tipo de valoraciones se pueden aplicar a todo tipo de productos y determinar la satisfacción de los clientes.
 
-Para determinar si un comentario está valorado positivamente o negativamente, partimos de una tabla con 6.000 comentarios de Amazon valorados
-en una escala del 1 al 5. Primero debemos estudiar las palabras de cada comentario y sacar las menos representativas, eso lo realizaremos con la funcion Tokenize y Bag of words. Una vez tengamos las palabras más importantes de cada comentario con la función Vectorizer, entrenaremos varios modelos para determinar hasta que punto es capaz de predecir si el comentario es positivo o negativo.
+Para determinar si un comentario está valorado positiva o negativamente, partimos de una tabla con 6.000 comentarios de Amazon valorados
+en una escala del 1 al 5. Primero debemos estudiar las palabras de cada comentario y sacar las menos representativas, eso lo realizaremos con la función Tokenize y Bag of words. Una vez tengamos las palabras más importantes de cada comentario con la función Vectorizer, entrenaremos varios modelos para determinar hasta qué punto es capaz de predecir si el comentario es positivo o negativo.
 
 Con el mejor modelo ya obtenido, nos descargaremos una lista de tweets con el hastag de cada compañía. Le aplicaremos el Vectorizador y el modelo de regresión, con el fín de obtener la valoración de cada comentario. 
 
-Con las valoraciones de cada compañía realizaremos un estudio estadístico, con el fín de determinar si una compañía tiene de media, comentarios más bien valorados que la otra.
+Con las valoraciones de cada compañía realizaremos un estudio estadístico, con el fin de determinar si una compañía tiene de media, comentarios más bien valorados que la otra.
 
 Vamos a ello!
 
-Importamos librerias
+Importamos librerías
 ```python
 import pandas as pd
 import numpy as np
@@ -488,7 +488,7 @@ print("El modelo tiene un r2 en el conjunto de test de %s" % r2_en_test)
     El modelo tiene un r2 en el conjunto de test de 0.00251333833448808
     
 
-El mejor modelo ha resultado ser la regresión logística con una r2 de 0,41 en el Train. Es un resultado relativamente bajo y se deberian añadir más comentarios para mejorar el modelo, también se podría testar otros modelos y ampliar el los hiperparámetros de los modelos. De momento seguiremos con el modelo de Regresión.
+El mejor modelo ha resultado ser la regresión logística con una r2 de 0,41 en el Train. Es un resultado relativamente bajo y se deberían añadir más comentarios para mejorar el modelo, también se podría testar otros modelos y ampliar el los hiperparámetros de los modelos. De momento seguiremos con el modelo de Regresión.
 
 # Obtención de los Tweets con Tweepy
 
@@ -499,7 +499,7 @@ import json
 import csv
 ```
 
-Los datos son privados pero se obtinen al aplciar a una cuenta de desarrolador en twiiter
+Los datos a continuación son privados, pero se obtienen al aplicar a una cuenta de desarrollador en Twiiter.
 ```python
 consumer_key = "####"
 consumer_secret = "####"
@@ -1194,9 +1194,9 @@ boxplot = result.boxplot(rot=90)
 {% include figure image_path="/images/output_61_0.png" %}      
 
     
-Se demustra que la variación es muy elevada, y que los comentarios son o muy positivos o muy negativos, hay poco término medio.
+En los Boxplots, se demuestra que la variación es muy elevada, y que los comentarios son o muy positivos o muy negativos, hay poco término medio.
 
-# Son las medias iguales?
+# ¿Son las medias iguales?
 
 
 ```python
@@ -1323,18 +1323,18 @@ print(int_b_media)
     0.19001808738673687
     
 
-Con una confinza del 95% podemos decir que las medias son iguales. Tanto Iberdorla como Naturgy tienen una media estadísticamente igual en la valoración de los tweets.
+Con una confianza del 95% podemos decir que las medias son iguales. Tanto Iberdorla como Naturgy tienen una media estadísticamente igual en la valoración de los tweets.
 
 # Conclusiones
 
 Se ha trabajado con NLP para detectar las palabras más representativas de los comentarios, con ello se ha aplicado un modelo para determinar su valoración.
 Una vez con el Vectorizador y el modelo, se ha aplicado a Tweets descargados de los días 3 al 5 de mayo de 2021 con los hastagas Iberdrola y Naturgy.
 
-El contraste de hipótesis nos ha demostrado que no había diferencias significativas entre los tweets de las dos compañías. Además las dos compañías han obtenido un 2,76 y 2,81 de valoración en los comentarios sobre 5. Si lo calculamos sobre una puntuación máxima de 10, podemos decir que han obtenido un 5,52 para Iberdrola y un 5,62 para Naturgy.
+El contraste de hipótesis nos ha demostrado que no había diferencias significativas entre los tweets de las dos compañías. Además, las dos compañías han obtenido un 2,76 y 2,81 de valoración en los comentarios sobre 5. Si lo calculamos sobre una puntuación máxima de 10, podemos decir que han obtenido un 5,52 para Iberdrola y un 5,62 para Naturgy.
 
-Hay que destacar que los Tweets incluyen quejas de los usuarios, autoplublicidad de las compañías, comentarios respecto al despempeño en bolsa de las acciones, etc.. y solo son tweets de 3 días. Podria ser más efectivo si hiciera el mismo análisis pero para comentarios del buzon de clientes de una compañía en concreto.
+Hay que destacar que los Tweets incluyen quejas de los usuarios, autoplublicidad de las compañías, comentarios respecto al desepempeño en bolsa de las acciones, etc.. y solo son tweets de 3 días. Podría ser más efectivo si hiciera el mismo análisis pero para comentarios del buzón de clientes de una compañía en concreto.
 
-Teniendo los algorítmos desarrollados, se peuden comprar sobre todos los temas imaginables, des de productos, ciudades, personas, partidos políticos, acciones.. en este cas han sido compañías pero se puede adaptar a cualquier producto.
+Teniendo los algoritmos desarrollados, se pueden comprar sobre todos los temas imaginables, des de productos, ciudades, personas, partidos políticos, acciones... en este caso han sido compañías pero se puede adaptar a cualquier producto.
 
 # Agradecimientos
-La parte del codigo de NLP se ha adaptado de Hector Escaso (https://hescaso.github.io/), posteriormente se ha creado un modelo de regresión para poder determinar la puntuación de cada modelo.
+La parte del codigo de NLP se ha adaptado de Héctor Escaso (https://hescaso.github.io/), posteriormente se ha creado un modelo de regresión para poder determinar la puntuación de cada modelo.
