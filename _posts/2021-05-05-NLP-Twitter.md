@@ -12,19 +12,20 @@ header:
 
 # NLP + Twitter + Iberdrola vs Naturgy
 
-En este ejercicio vamos a crear un modelo de regresión y un contraste de medias para determinar si los obtenidos en Twitter de dos compañias eléctricas, en este caso Iberdrola y Naturagy, son mejores unos que otros.
+En este extenso ejercicio, vamos a crear un algoritmo para estudiar las palabras más representativas de los comentarios, un modelo de regresión y un contraste de medias. El objetivo es determinar si los obtenidos en Twitter de dos compañias eléctricas, en este caso Iberdrola y Naturagy, son mejores unos que otros.
 
+Éste tipo de valoraciones se pueden aplicar a todo tipo de productos y determinar la satisfacción de los clientes.
 
-Para determinar si un comentario está valorado positivamente o negativamente, partimos de una tabla con 6.000 comentarios de Amazon y valorados
-en una escala del 1 al 5. Primero debemos estudiar las palabras de cada comentario y sacar las menos representativas, eso lo realizaremos con la funcion Tokenize y Bag of words.
+Para determinar si un comentario está valorado positivamente o negativamente, partimos de una tabla con 6.000 comentarios de Amazon valorados
+en una escala del 1 al 5. Primero debemos estudiar las palabras de cada comentario y sacar las menos representativas, eso lo realizaremos con la funcion Tokenize y Bag of words. Una vez tengamos las palabras más importantes de cada comentario con la función Vectorizer, entrenaremos varios modelos para determinar hasta que punto es capaz de predecir si el comentario es positivo o negativo.
 
-Una vez tengamos las palabras más importantes de cada comentario con la función Vectorizer, entrenaremos varios modelos para determinar hasta que punto es capaz de predecir si el comentario es positivo o negativo.
+Con el mejor modelo ya obtenido, nos descargaremos una lista de tweets con el hastag de cada compañia. Le aplicaremos el Vectorizador y el modelo de regresión, con el fín de obtener la valoración de cada comentario. 
 
-Con el mejor modelo ya obtenido, nos descargaremos una lista de tweets con el hastag de cada compañia.
+Con las valoraciones de cada compañia realizaremos un estudio estadístico, con el fín de determinar si una compañia tiene de media, comentarios más bien valorados que la otra.
 
-Le aplicaremos el Vectorizador y el modelo de regresión con el fin de obtener la valoración de cada comentario. Con las valoraciones de cada compañia realizaremos un estudio estadístico para determinar si una compañia tiene de media mcomentarios más bien valorados que la otra.
+Vamos a ello!
 
-
+Importamos librerias
 ```python
 import pandas as pd
 import numpy as np
